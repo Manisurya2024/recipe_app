@@ -1,0 +1,42 @@
+<h1><%= @recipe.title %></h1>
+
+<p><strong>Description:</strong> <%= @recipe.description %></p>
+<p><strong>Ingredients:</strong> <%= @recipe.ingredients %></p>
+<p><strong>Instructions:</strong> <%= @recipe.instructions %></p>
+<p><strong>Category:</strong> <%= @recipe.category.name %></p>
+<p><strong>Created by:</strong> <%= @recipe.user.name %></p>
+
+<% if logged_in? && current_user == @recipe.user %>
+  <%= link_to "Edit", edit_recipe_path(@recipe) %>
+  <%= button_to "Delete", recipe_path(@recipe), method: :delete %>
+<% end %>
+
+<hr>
+
+<h2>Comments</h2>
+
+<% @recipe.comments.each do |comment| %>
+  <p>
+    <strong><%= comment.user.name %>:</strong>
+    <%= comment.content %>
+  </p>
+
+  <% if logged_in? && current_user == comment.user %>
+    <%= button_to "Delete Comment", recipe_comment_path(@recipe, comment), method: :delete %>
+  <% end %>
+<% end %>
+
+<% if logged_in? %>
+  <h3>Add a Comment</h3>
+
+  <%= form_with model: [@recipe, @comment] do |f| %>
+    <div>
+      <%= f.label :content %><br>
+      <%= f.text_area :content %>
+    </div>
+
+    <div>
+      <%= f.submit "Add Comment" %>
+    </div>
+  <% end %>
+<% end %>
