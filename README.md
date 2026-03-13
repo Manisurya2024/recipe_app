@@ -1,24 +1,25 @@
-# README
+# Recipe App
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is a Ruby on Rails web application that allows users to create and share recipes.
 
-Things you may want to cover:
+## Features
+- User authentication (Sign up / Login)
+- Create, view, and manage recipes
+- Categories for organizing recipes
+- Users can comment on recipes
+- Nested resources implemented
 
-* Ruby version
+## Technologies Used
+- Ruby on Rails
+- SQLite
+- Render (for deployment)
 
-* System dependencies
+## Live Application
+https://recipe-app-c2ga.onrender.com
 
-* Configuration
+## Test Account
+Email: test@test.com  
+Password: password
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## GitHub Repository
+https://github.com/Manisurya2024/recipe_app
