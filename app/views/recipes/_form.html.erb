@@ -20,6 +20,12 @@
     <%= f.text_area :instructions %>
   </div>
 
+  <!-- ✅ ADD THIS -->
+  <div>
+    <%= f.label :category_id, "Category" %><br>
+    <%= f.collection_select :category_id, Category.all, :id, :name %>
+  </div>
+
   <div>
     <%= f.submit %>
   </div>
