@@ -21,36 +21,8 @@
     <strong><%= comment.user.present? ? comment.user.name : "Anonymous" %>:</strong>
     <%= comment.content %>
   </p>
-
-  <% if logged_in? && current_user == comment.user %>
-    <%= button_to "Delete Comment", recipe_comment_path(@recipe, comment), method: :delete %>
-  <% end %>
 <% end %>
 
 <hr>
-
-<% if logged_in? %>
-  <h3>Add a Comment</h3>
-
-  <%= form_with url: recipe_comments_path(@recipe), method: :post do |f| %>
-    <div>
-      <%= f.label :content %><br>
-      <%= f.text_area :content %>
-    </div>
-
-    <div>
-      <%= f.submit "Add Comment" %>
-    </div>
-  <% end %>
-<% end %>
-
-<hr>
-
-<% if logged_in? && current_user == @recipe.user %>
-  <%= link_to "Edit", edit_recipe_path(@recipe) %> |
-  <%= button_to "Delete", recipe_path(@recipe), method: :delete %>
-<% end %>
-
-<br><br>
 
 <%= link_to "Back", recipes_path %>

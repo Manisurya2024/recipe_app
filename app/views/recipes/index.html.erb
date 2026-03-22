@@ -5,15 +5,23 @@
 <hr>
 
 <% if @recipes.any? %>
-  <ul>
-    <% @recipes.each do |recipe| %>
-      <li>
-        <strong><%= link_to recipe.title, recipe_path(recipe) %></strong><br>
-        <%= recipe.description %>
-      </li>
-      <br>
-    <% end %>
-  </ul>
+  <% @recipes.each do |recipe| %>
+    <div>
+      <h3><%= link_to recipe.title, recipe %></h3>
+
+      <p><strong>Description:</strong> <%= recipe.description %></p>
+
+      <p><strong>By:</strong>
+        <%= recipe.user.present? ? recipe.user.name : "Guest" %>
+      </p>
+
+      <p><strong>Category:</strong>
+        <%= recipe.category.present? ? recipe.category.name : "None" %>
+      </p>
+
+      <hr>
+    </div>
+  <% end %>
 <% else %>
   <p>No recipes found. Create one!</p>
 <% end %>
