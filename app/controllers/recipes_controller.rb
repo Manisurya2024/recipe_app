@@ -28,14 +28,14 @@ class RecipesController < ApplicationController
 
   def create
   @recipe = Recipe.new(recipe_params)
-
-  # assign user only if logged in
   @recipe.user = current_user if current_user
 
   if @recipe.save
     redirect_to @recipe, notice: "Recipe created successfully."
   else
-    render :new, status: :unprocessable_entity
+    # 👇 THIS WILL SHOW ERROR
+    flash.now[:alert] = @recipe.errors.full_messages.join(", ")
+    render :new
   end
 end
 
