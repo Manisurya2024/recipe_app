@@ -3,8 +3,8 @@
 <p><strong>Description:</strong> <%= @recipe.description %></p>
 <p><strong>Ingredients:</strong> <%= @recipe.ingredients %></p>
 <p><strong>Instructions:</strong> <%= @recipe.instructions %></p>
-<p><strong>Category:</strong> <%= @recipe.category&.name %></p>
-<p><strong>Added by:</strong> <%= @recipe.user&.name %></p>
+<p><strong>Category:</strong> <%= @recipe.category.present? ? @recipe.category.name : "None" %></p>
+<p><strong>Added by:</strong> <%= @recipe.user.present? ? @recipe.user.name : "Guest" %></p>
 
 <% if logged_in? && current_user == @recipe.user %>
   <%= link_to "Edit", edit_recipe_path(@recipe) %>
@@ -29,7 +29,7 @@
 <% if logged_in? %>
   <h3>Add a Comment</h3>
 
-  <%= form_with model: [@recipe, Comment.new] do |f| %>
+  <%= form_with url: recipe_comments_path(@recipe), method: :post do |f| %>
     <%= f.text_area :content %><br>
     <%= f.submit "Add Comment" %>
   <% end %>

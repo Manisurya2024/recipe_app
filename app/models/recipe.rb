@@ -1,5 +1,5 @@
 class Recipe < ApplicationRecord
-  belongs_to :user
+  belongs_to :user, optional: true
   belongs_to :category, optional: true
   has_many :comments, dependent: :destroy
 
