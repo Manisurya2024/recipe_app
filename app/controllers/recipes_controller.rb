@@ -5,10 +5,13 @@ class RecipesController < ApplicationController
 
   def index
     @recipes = Recipe.all
+render json: @recipes
   end
+  
 
   def show
-    @comment = Comment.new
+     @recipe = Recipe.find(params[:id])
+  render json: @recipe
   end
 
   def new
