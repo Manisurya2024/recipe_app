@@ -1,11 +1,19 @@
-<h1>All Recipes</h1>
+<h1>Recipes</h1>
 
-<% @recipes.each do |recipe| %>
-  <div>
-    <h3><%= link_to recipe.title, recipe_path(recipe) %></h3>
-    <p><%= recipe.description %></p>
-    <p><strong>Category:</strong> <%= recipe.category.name %></p>
-    <p><strong>Created by:</strong> <%= recipe.user.name %></p>
-    <hr>
-  </div>
+<%= link_to "New Recipe", new_recipe_path %>
+
+<hr>
+
+<% if @recipes.any? %>
+  <ul>
+    <% @recipes.each do |recipe| %>
+      <li>
+        <strong><%= link_to recipe.title, recipe_path(recipe) %></strong><br>
+        <%= recipe.description %>
+      </li>
+      <br>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No recipes found. Create one!</p>
 <% end %>
