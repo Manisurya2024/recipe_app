@@ -1,5 +1,5 @@
 class RecipesController < ApplicationController
-  before_action :require_login, except: [:index, :show]
+ before_action :require_login, except: [:index, :show], unless: -> { request.format.json? }
   before_action :set_recipe, only: [:show, :edit, :update, :destroy]
   before_action :authorize_recipe_owner, only: [:edit, :update, :destroy]
 
