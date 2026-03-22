@@ -1,4 +1,5 @@
 <%= form_with model: @recipe do |f| %>
+
   <div>
     <%= f.label :title %><br>
     <%= f.text_field :title %>
@@ -20,11 +21,7 @@
   </div>
 
   <div>
-    <%= f.label :category_id, "Category" %><br>
-    <%= f.collection_select :category_id, Category.all, :id, :name %>
+    <%= f.submit "Create Recipe" %>
   </div>
 
-  <div>
-    <%= f.submit %>
-  </div>
 <% end %>
