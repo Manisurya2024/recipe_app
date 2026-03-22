@@ -10,7 +10,10 @@ user = User.create!(
   password_confirmation: "password"
 )
 
+# ✅ ADD MULTIPLE CATEGORIES
 dessert = Category.create!(name: "Dessert")
+food    = Category.create!(name: "Food")
+drinks  = Category.create!(name: "Drinks")
 
 recipe = Recipe.create!(
   title: "Chocolate Cake",
