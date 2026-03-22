@@ -27,14 +27,17 @@ class RecipesController < ApplicationController
   end
 
   def create
-    @recipe = current_user.recipes.build(recipe_params)
+  @recipe = Recipe.new(recipe_params)
 
-    if @recipe.save
-      redirect_to @recipe, notice: "Recipe created successfully."
-    else
-      render :new, status: :unprocessable_entity
-    end
+  # assign user only if logged in
+  @recipe.user = current_user if current_user
+
+  if @recipe.save
+    redirect_to @recipe, notice: "Recipe created successfully."
+  else
+    render :new, status: :unprocessable_entity
   end
+end
 
   def edit
   end
