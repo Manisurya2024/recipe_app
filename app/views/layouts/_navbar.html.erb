@@ -1,16 +1,21 @@
-<nav>
-  <%= link_to "Home", root_path %> |
-  <%= link_to "Recipes", recipes_path %> |
-  <%= link_to "Categories", categories_path %> |
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container">
+    <%= link_to "RecipeApp", root_path, class: "navbar-brand" %>
 
-  <% if logged_in? %>
-    <%= link_to "Profile", user_path(current_user) %> |
-    <%= link_to "New Recipe", new_recipe_path %> |
-    <%= button_to "Logout", logout_path, method: :delete %>
-  <% else %>
-    <%= link_to "Sign Up", signup_path %> |
-    <%= link_to "Login", login_path %>
-  <% end %>
+    <div>
+      <%= link_to "Recipes", recipes_path, class: "btn btn-outline-light me-2" %>
+      <%= link_to "Categories", categories_path, class: "btn btn-outline-light me-2" %>
+
+      <% if logged_in? %>
+        <%= link_to "New Recipe", new_recipe_path, class: "btn btn-success me-2" %>
+
+        <!-- ✅ FIXED -->
+        <%= button_to "Logout", logout_path, method: :delete, class: "btn btn-danger" %>
+
+      <% else %>
+        <%= link_to "Login", login_path, class: "btn btn-primary me-2" %>
+        <%= link_to "Sign Up", signup_path, class: "btn btn-success" %>
+      <% end %>
+    </div>
+  </div>
 </nav>
-
-<hr>

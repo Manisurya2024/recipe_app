@@ -1,31 +1,26 @@
-Comment.destroy_all
-Recipe.destroy_all
-Category.destroy_all
-User.destroy_all
-
-user = User.create!(
+# Create user
+user = User.create(
   name: "Test User",
-  email: "test@test.com",
-  password: "password",
-  password_confirmation: "password"
+  email: "test@example.com",
+  password: "password"
 )
 
-# ✅ ADD MULTIPLE CATEGORIES
-dessert = Category.create!(name: "Dessert")
-food    = Category.create!(name: "Food")
-drinks  = Category.create!(name: "Drinks")
+# Create category
+category = Category.create(name: "Food")
 
-recipe = Recipe.create!(
-  title: "Chocolate Cake",
-  description: "Delicious chocolate cake",
-  ingredients: "flour, cocoa powder, sugar",
-  instructions: "mix ingredients and bake",
-  user: user,
-  category: dessert
+# Create recipe
+recipe = Recipe.create(
+  title: "Sample Recipe",
+  description: "Simple test recipe",
+  ingredients: "Salt, Water",
+  instructions: "Mix and cook",
+  category: category,
+  user: user
 )
 
-Comment.create!(
-  content: "Looks delicious!",
+# Create comment
+Comment.create(
+  content: "Nice recipe!",
   user: user,
   recipe: recipe
 )

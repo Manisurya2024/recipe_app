@@ -1,28 +1,65 @@
-<h1><%= @recipe.title %></h1>
+<div class="card shadow-sm">
+  <div class="card-body">
 
-<p><strong>Description:</strong> <%= @recipe.description %></p>
-<p><strong>Ingredients:</strong> <%= @recipe.ingredients %></p>
-<p><strong>Instructions:</strong> <%= @recipe.instructions %></p>
+    <h2 class="card-title mb-3"><%= @recipe.title %></h2>
 
-<p><strong>Category:</strong>
-  <%= @recipe.category.present? ? @recipe.category.name : "None" %>
-</p>
+    <p class="mb-2">
+      <strong>Description:</strong><br>
+      <%= @recipe.description %>
+    </p>
 
-<p><strong>By:</strong>
-  <%= @recipe.user.present? ? @recipe.user.name : "Guest" %>
-</p>
+    <p class="mb-2">
+      <strong>Ingredients:</strong><br>
+      <%= @recipe.ingredients %>
+    </p>
+
+    <p class="mb-2">
+      <strong>Instructions:</strong><br>
+      <%= @recipe.instructions %>
+    </p>
+
+    <p class="mb-2">
+      <strong>Category:</strong>
+      <span class="badge bg-primary">
+        <%= @recipe.category.present? ? @recipe.category.name : "None" %>
+      </span>
+    </p>
+
+    <p class="mb-3">
+      <strong>By:</strong>
+      <%= @recipe.user.present? ? @recipe.user.name : "Guest" %>
+    </p>
+
+    <%= link_to "Back", recipes_path, class: "btn btn-secondary" %>
+
+  </div>
+</div>
 
 <hr>
 
-<h2>Comments</h2>
+<h3 class="mt-4">Comments</h3>
 
-<% @recipe.comments.each do |comment| %>
-  <p>
-    <strong><%= comment.user.present? ? comment.user.name : "Anonymous" %>:</strong>
-    <%= comment.content %>
-  </p>
+<% if @comments.any? %>
+  <% @comments.each do |comment| %>
+  <div class="card mb-2">
+    <div class="card-body">
+      
+      <strong>
+        <%= comment.user.present? ? comment.user.name : "Anonymous" %>
+      </strong>
+
+      <p class="mb-2"><%= comment.content %></p>
+
+      <% if logged_in? && comment.user == current_user %>
+       <%= button_to "Delete",
+    [@recipe, comment],
+    method: :delete,
+    data: { confirm: "Are you sure?" },
+    class: "btn btn-sm btn-danger" %>
+      <% end %>
+    </div>
+  </div>
 <% end %>
-
-<hr>
-
-<%= link_to "Back", recipes_path %>
+<% else %>
+  <p>No comments yet.</p>
+<% end %>

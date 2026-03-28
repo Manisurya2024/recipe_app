@@ -3,25 +3,27 @@ class CommentsController < ApplicationController
 
   def create
     @recipe = Recipe.find(params[:recipe_id])
-
     @comment = @recipe.comments.build(comment_params)
     @comment.user = current_user
 
     if @comment.save
-      redirect_to recipe_path(@recipe)
+      redirect_to @recipe, notice: "Comment added!"
     else
-      redirect_to recipe_path(@recipe)
+      redirect_to @recipe, alert: "Failed to add comment."
     end
   end
 
   def destroy
-    @comment = Comment.find(params[:id])
-    recipe = @comment.recipe
+  @recipe = Recipe.find(params[:recipe_id])
+  @comment = @recipe.comments.find(params[:id])
 
+  if @comment.user == current_user
     @comment.destroy
-
-    redirect_to recipe_path(recipe)
+    redirect_to @recipe, notice: "Comment deleted!"
+  else
+    redirect_to @recipe, alert: "Not authorized!"
   end
+end
 
   private
 

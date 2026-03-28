@@ -1,6 +1,7 @@
 class RecipesController < ApplicationController
   before_action :require_login, except: [:index, :show], unless: -> { request.format.json? }
   before_action :set_recipe, only: [:show, :edit, :update, :destroy]
+  before_action :authorize_user, only: [:destroy]
 
   def index
     @recipes = Recipe.all
@@ -12,12 +13,13 @@ class RecipesController < ApplicationController
   end
 
   def show
-    respond_to do |format|
-      format.html
-      format.json { render json: @recipe }
-    end
-  end
+  @comments = @recipe.comments
 
+  respond_to do |format|
+    format.html
+    format.json { render json: @recipe }
+  end
+end
   def new
     @recipe = Recipe.new
   end
@@ -47,7 +49,7 @@ class RecipesController < ApplicationController
 
   def destroy
     @recipe.destroy
-    redirect_to recipes_path
+    redirect_to recipes_path, notice: "Recipe deleted successfully."
   end
 
   private
@@ -56,7 +58,11 @@ class RecipesController < ApplicationController
     @recipe = Recipe.find(params[:id])
   end
 
- def recipe_params
-  params.require(:recipe).permit(:title, :description, :ingredients, :instructions, :category_id)
-end
+  def recipe_params
+    params.require(:recipe).permit(:title, :description, :ingredients, :instructions, :category_id)
+  end
+
+  def authorize_user
+    redirect_to recipes_path, alert: "Not authorized!" unless @recipe.user == current_user
+  end
 end
