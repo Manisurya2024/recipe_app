@@ -1,15 +1,17 @@
 # Create user
-user = User.create(
+user = User.create!(
   name: "Test User",
   email: "test@example.com",
   password: "password"
 )
 
 # Create category
-category = Category.create(name: "Food")
+category = Category.create!(
+  name: "Food"
+)
 
 # Create recipe
-recipe = Recipe.create(
+recipe = Recipe.create!(
   title: "Sample Recipe",
   description: "Simple test recipe",
   ingredients: "Salt, Water",
@@ -19,7 +21,7 @@ recipe = Recipe.create(
 )
 
 # Create comment
-Comment.create(
+Comment.create!(
   content: "Nice recipe!",
   user: user,
   recipe: recipe
