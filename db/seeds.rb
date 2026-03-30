@@ -1,16 +1,10 @@
-# Create user
-user = User.create!(
-  name: "Test User",
-  email: "test@example.com",
-  password: "password"
-)
+user = User.find_or_create_by!(email: "test@example.com") do |u|
+  u.name = "Test User"
+  u.password = "password"
+end
 
-# Create category
-category = Category.create!(
-  name: "Food"
-)
+category = Category.find_or_create_by!(name: "Food")
 
-# Create recipe
 recipe = Recipe.create!(
   title: "Sample Recipe",
   description: "Simple test recipe",
@@ -20,7 +14,6 @@ recipe = Recipe.create!(
   user: user
 )
 
-# Create comment
 Comment.create!(
   content: "Nice recipe!",
   user: user,
