@@ -1,21 +1,58 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <div class="container">
+  <div class="container-fluid">
+
+    <!-- LOGO / HOME -->
     <%= link_to "RecipeApp", root_path, class: "navbar-brand" %>
 
-    <div>
-      <%= link_to "Recipes", recipes_path, class: "btn btn-outline-light me-2" %>
-      <%= link_to "Categories", categories_path, class: "btn btn-outline-light me-2" %>
+    <!-- TOGGLE BUTTON (for mobile) -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-      <% if logged_in? %>
-        <%= link_to "New Recipe", new_recipe_path, class: "btn btn-success me-2" %>
+    <!-- NAV ITEMS -->
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
 
-        <!-- ✅ FIXED -->
-        <%= button_to "Logout", logout_path, method: :delete, class: "btn btn-danger" %>
+        <!-- CATEGORIES -->
+        <li class="nav-item">
+          <%= link_to "Categories", categories_path, class: "nav-link" %>
+        </li>
 
-      <% else %>
-        <%= link_to "Login", login_path, class: "btn btn-primary me-2" %>
-        <%= link_to "Sign Up", signup_path, class: "btn btn-success" %>
-      <% end %>
+        <% if current_user.present? %>
+
+          <!-- NEW RECIPE -->
+          <li class="nav-item">
+            <%= link_to "New Recipe", new_recipe_path, class: "nav-link btn btn-success text-white ms-2" %>
+          </li>
+
+          <!-- USER EMAIL -->
+          <li class="nav-item">
+            <span class="nav-link text-white">
+              👤 <%= current_user.email %>
+            </span>
+          </li>
+
+          <!-- LOGOUT -->
+          <li class="nav-item">
+            <%= button_to "Logout", logout_path, method: :delete, class: "btn btn-danger ms-2" %>
+          </li>
+
+        <% else %>
+
+          <!-- LOGIN -->
+          <li class="nav-item">
+            <%= link_to "Login", login_path, class: "nav-link btn btn-primary text-white ms-2" %>
+          </li>
+
+          <!-- SIGNUP -->
+          <li class="nav-item">
+            <%= link_to "Sign Up", signup_path, class: "nav-link btn btn-warning text-dark ms-2" %>
+          </li>
+
+        <% end %>
+
+      </ul>
     </div>
+
   </div>
 </nav>

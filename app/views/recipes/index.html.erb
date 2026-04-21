@@ -3,12 +3,24 @@
 <div class="row">
   <% @recipes.each do |recipe| %>
     <div class="col-md-4">
-      <div class="card mb-4">
+      <div class="card mb-4 shadow-sm">
+        
         <div class="card-body">
           <h5 class="card-title"><%= recipe.title %></h5>
-          <p class="card-text"><%= truncate(recipe.description, length: 100) %></p>
-          <%= link_to "View", recipe_path(recipe), class: "btn btn-primary" %>
+
+          <p class="card-text text-muted">
+            <%= truncate(recipe.description, length: 80) %>
+          </p>
+
+          <p>
+            <span class="badge bg-primary">
+              <%= recipe.category.name if recipe.category %>
+            </span>
+          </p>
+
+          <%= link_to "View", recipe_path(recipe), class: "btn btn-primary btn-sm" %>
         </div>
+
       </div>
     </div>
   <% end %>
