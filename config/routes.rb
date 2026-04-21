@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root "recipes#index"
+  root "api/v1/recipes#index"
 
   get "/signup", to: "users#new"
   post "/signup", to: "users#create"
